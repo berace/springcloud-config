@@ -47,6 +47,9 @@ src/main/resources下添加配置文件application.properties
     management.endpoints.web.exposure.include=*
     
    2、java文件configuration-client/src/main/java/hello/ConfigClientApplication.java
+   
+   By default, the configuration values are read on the client’s startup, and not again. You can force a bean to refresh its configuration - to pull updated values from the Config Server - by annotating the MessageRestController with the Spring Cloud Config @RefreshScope and then by triggering a refresh event.
+   
    @SpringBootApplication
 public class ConfigClientApplication {
 
@@ -81,5 +84,12 @@ class MessageRestController {
     }
 }
   
+启动客户端，通过地址访问http://localhost:8080/detail或者http://localhost:8080/message
+即可返回配置的value。
+
+动态修改a-bootiful-client.properties，不需要任何重启。
+需要手动刷新：http://localhost:8080/actuator/refresh（post方式访问）
+
+此时再去访问http://localhost:8080/detail即可看到最新的配置
 
 
