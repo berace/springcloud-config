@@ -38,17 +38,17 @@ public class SimpleFilter extends ZuulFilter {
 
   @Override
   public String filterType() {
-    return "pre";
+    return "pre";//filter 类型
   }
 
   @Override
   public int filterOrder() {
-    return 1;
+    return 1;//如果多个filter，该filter执行的顺序
   }
 
   @Override
   public boolean shouldFilter() {
-    return true;
+    return true;//包含确定何时执行此过滤器的逻辑（将始终执行此特定过滤器）。
   }
 
   @Override
@@ -61,6 +61,13 @@ public class SimpleFilter extends ZuulFilter {
     return null;
   }
 }
+说明：
+Now let’s see how we can filter requests through our proxy service. Zuul has four standard filter types:
+pre filters：请求路由之前执行
+route filters：处理请求的实际路由
+post filters：请求被路由之后执行
+error filters：处理请求的时候如果出错了执行
+
 2.添加文件gateway/src/main/java/hello/GatewayApplication.java
 @EnableZuulProxy
 @SpringBootApplication
